@@ -123,3 +123,6 @@ fabric.properties
 
 !.idea/codeStyles
 !.idea/runConfigurations
+
+### Config Files & Environment ###
+src/services/api-client.ts
