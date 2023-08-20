@@ -10,7 +10,7 @@ interface Genre {
   image_background: string;
 }
 
-interface FetchGamesResponse {
+interface FetchGenresResponse {
   count: number;
   next: string;
   previous: string;
@@ -27,7 +27,7 @@ const useGenres = () => {
 
     setIsLoading(true);
     apiClient
-      .get<FetchGamesResponse>("/genres", { signal: controller.signal })
+      .get<FetchGenresResponse>("/genres", { signal: controller.signal })
       .then(({ data }) => {
         setGenres(data.results);
         setIsLoading(false);
