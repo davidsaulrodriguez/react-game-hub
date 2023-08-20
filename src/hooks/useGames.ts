@@ -37,6 +37,7 @@ interface GameModel {
     name: string;
     slug: string;
   };
+  parent_platforms: { platform: Platform }[];
   platforms: {
     platform: {
       id: number;
@@ -49,6 +50,12 @@ interface GameModel {
       recommended: string;
     };
   };
+}
+
+export interface Platform {
+  id: number;
+  name: string;
+  slug: string;
 }
 
 interface FetchGamesResponse {
