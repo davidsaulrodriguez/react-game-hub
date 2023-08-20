@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client.ts";
-import { CanceledError } from "axios";
+import useData from "./useData.ts";
 
-interface Genre {
+export interface Genre {
   id: number;
   name: string;
   slug: string;
@@ -10,38 +8,6 @@ interface Genre {
   image_background: string;
 }
 
-interface FetchGenresResponse {
-  count: number;
-  next: string;
-  previous: string;
-  results: Genre[];
-}
-
-const useGenres = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    setIsLoading(true);
-    apiClient
-      .get<FetchGenresResponse>("/genres", { signal: controller.signal })
-      .then(({ data }) => {
-        setGenres(data.results);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-        setIsLoading(false);
-      });
-
-    return () => controller.abort();
-  }, []);
-
-  return { genres, error, isLoading };
-};
+const useGenres = () => useData<Genre>("/genres");
 
 export default useGenres;
