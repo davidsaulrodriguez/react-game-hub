@@ -1,5 +1,6 @@
 import { GameModel } from "../hooks/useGames";
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react"; // temporary import until we have a real model
+import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import PlatformIconList from "./PlatformIconList.tsx"; // temporary import until we have a real model
 
 interface Props {
   game: GameModel;
@@ -13,6 +14,9 @@ const GameCard = ({ game }: Props) => {
         <Heading fontSize="2xl" size="md">
           {game.name}
         </Heading>
+        <PlatformIconList
+          platforms={game.parent_platforms.map((p) => p.platform)}
+        />
       </CardBody>
     </Card>
   );
